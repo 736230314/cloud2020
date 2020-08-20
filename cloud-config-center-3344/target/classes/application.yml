@@ -1,0 +1,38 @@
+server:
+  port: 3344
+
+
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+          #使用https协议,填上账号密码
+          uri: https://github.com/736230314/springcloud-config.git
+          search-paths:
+            - springcloud-config
+          force-pull: true
+          username: 736230314
+          password: 916592553.q
+      label: master  #读取master分支
+  #rabbitmq相关配置
+  rabbitmq:
+    host: 192.168.41.121
+    username: admin
+    password: admin
+    port: 5672
+
+eureka:
+  client:
+    #集群版
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
+
+##rabbitmq相关配置,暴露bus刷新配置的端点
+management:
+  endpoints: #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'
